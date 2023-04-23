@@ -62,17 +62,22 @@ namespace TaskApplication
         }
 
         public ICommand OpenAddToDoListWindowCommand => new RelayCommand(OpenAddToDoListWindow);
+        public ICommand OpenAddTaskWindowCommand=>new RelayCommand(OpenAddTaskWindow);
         public ICommand RemoveTaskCommand => new RelayCommand(RemoveTask);
         private void OpenAddToDoListWindow()
         {
-            AddTDL AddTDLWindow = new AddTDL();
+            AddTDL addTDLWindow = new AddTDL();
             AddNewTDLViewModel addNewTDLViewModel = new AddNewTDLViewModel(manager);
-            AddTDLWindow.DataContext = addNewTDLViewModel;
-            AddTDLWindow.ShowDialog();
+            addTDLWindow.DataContext = addNewTDLViewModel;
+            addTDLWindow.ShowDialog();
              
         }
-        private void AddTask()
+        private void OpenAddTaskWindow()
         {
+            AddTask addTaskWindow=new AddTask();
+            AddNewTaskViewModel addNewTaskViewModel = new AddNewTaskViewModel(taskManager);
+            addTaskWindow.DataContext = addNewTaskViewModel;
+            addTaskWindow.ShowDialog();
 
         }
         private void RemoveTask()

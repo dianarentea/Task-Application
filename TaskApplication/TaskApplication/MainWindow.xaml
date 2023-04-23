@@ -40,7 +40,7 @@
                 <MenuItem Header="Change Path"/>
             </MenuItem>
             <MenuItem Header="Task">
-                <MenuItem Header="Add" />
+                <MenuItem Header="Add" Command="{Binding OpenAddTaskWindowCommand}"/>
                 <MenuItem Header="Edit" />
                 <MenuItem Header="Delete" Command="{Binding RemoveTaskCommand}"/>
                 <MenuItem Header="Set Done" />

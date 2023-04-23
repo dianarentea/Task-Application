@@ -82,10 +82,6 @@ namespace TaskApplication.Services
             NotifyPropertyChanged(nameof(ItemsCollection));
         }
 
-        public void UpdateItemsCollection(ToDoList newItem)
-        {
-            ItemsCollection.Add(newItem);
-        }
 
     }
 

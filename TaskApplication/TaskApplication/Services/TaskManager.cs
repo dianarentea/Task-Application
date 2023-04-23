@@ -7,7 +7,7 @@ using TaskApplication.Models;
 
 namespace TaskApplication.Services
 {
-    internal class TaskManager
+    internal class TaskManager:BaseVM
     {
         public ObservableCollection<Task> TaskList { get; set; }
 
@@ -25,6 +25,10 @@ namespace TaskApplication.Services
                 
             };
         }
-
+        public void AddTask(Task task)
+        {
+            TaskList.Add(task);
+            NotifyPropertyChanged(nameof(TaskList));
+        }
     }
 }

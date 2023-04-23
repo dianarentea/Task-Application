@@ -70,6 +70,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="AddTask.xaml.cs">
+      <DependentUpon>AddTask.xaml</DependentUpon>
+    </Compile>
     <Compile Include="AddTDL.xaml.cs">
       <DependentUpon>AddTDL.xaml</DependentUpon>
     </Compile>
@@ -80,6 +83,10 @@
     <Compile Include="ToDoListViewModel.cs" />
     <Compile Include="ViewModels\AddNewTaskViewModel.cs" />
     <Compile Include="ViewModels\AddNewTDLViewModel.cs" />
+    <Page Include="AddTask.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="AddTDL.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
