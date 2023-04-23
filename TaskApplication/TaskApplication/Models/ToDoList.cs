@@ -14,6 +14,7 @@ namespace TaskApplication.Models
             SubCollection=new ObservableCollection<ToDoList>();
         }
         public ObservableCollection<ToDoList> SubCollection { get; set; }
+        public ObservableCollection<Task> TaskList { get; set; }
         private string name;
         public string Name
         {

@@ -13,6 +13,7 @@ using TaskApplication.Models;
 using TaskApplication.Services;
 using TaskApplication.ViewModels;
 using RelayCommand = TaskApplication.Helpers.RelayCommand;
+using Task = TaskApplication.Models.Task;
 
 namespace TaskApplication
 {
@@ -20,11 +21,13 @@ namespace TaskApplication
     {
         public ToDoListManager manager;
         public ToDoList doList;
+        public TaskManager taskManager;
         public ToDoListViewModel()
         {
             manager = new ToDoListManager();
+            taskManager = new TaskManager();
             ItemsCollection = manager.ItemsCollection;
-
+            TaskCollection=taskManager.TaskList;
           
         }
         private ObservableCollection<ToDoList> _itemsCollection;
@@ -37,8 +40,29 @@ namespace TaskApplication
                 NotifyPropertyChanged(nameof(ItemsCollection));
             }
         }
-       
+        private ObservableCollection<Task> _taskCollection;
+        public ObservableCollection<Task> TaskCollection
+        {
+            get { return _taskCollection; }
+            set
+            {
+                _taskCollection = value;
+                NotifyPropertyChanged(nameof(TaskCollection));
+            }
+        }
+        private Task _selectedTask;
+        public Task SelectedTask
+        {
+            get { return _selectedTask; }
+            set
+            {
+                _selectedTask = value;
+                NotifyPropertyChanged(nameof(SelectedTask));
+            }
+        }
+
         public ICommand OpenAddToDoListWindowCommand => new RelayCommand(OpenAddToDoListWindow);
+        public ICommand RemoveTaskCommand => new RelayCommand(RemoveTask);
         private void OpenAddToDoListWindow()
         {
             AddTDL AddTDLWindow = new AddTDL();
@@ -46,6 +70,15 @@ namespace TaskApplication
             AddTDLWindow.DataContext = addNewTDLViewModel;
             AddTDLWindow.ShowDialog();
              
+        }
+        private void AddTask()
+        {
+
+        }
+        private void RemoveTask()
+        {
+            if(SelectedTask!=null)
+            TaskCollection.Remove(SelectedTask);
         }
        
 

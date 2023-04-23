@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using TaskApplication.Helpers;
 using TaskApplication.Models;
+using Task = TaskApplication.Models.Task;
 
 namespace TaskApplication.Services
 {
@@ -23,15 +24,21 @@ namespace TaskApplication.Services
                 NotifyPropertyChanged(nameof(ItemsCollection));
             }
         }
-
+        public ObservableCollection<Task> TaskList;
+        TaskManager taskManager;
         public ToDoListManager()
         {
             ItemsCollection = new ObservableCollection<ToDoList>();
+            taskManager = new TaskManager();
+            TaskList = taskManager.TaskList;     
             InitializeItemsCollection();
+        
+
         }
 
         private void InitializeItemsCollection()
         {
+            
             ItemsCollection.Add(new ToDoList
             {
                 Name = "Item1",
@@ -40,7 +47,7 @@ namespace TaskApplication.Services
             {
                 new ToDoList{Name="b", Image="/TaskApplication;component/Images/ToDoListIcons/img2.jpg",SubCollection=new ObservableCollection<ToDoList>()
                 { new ToDoList() { Name="c", Image="/TaskApplication;component/Images/ToDoListIcons/img3.jpg", SubCollection=new ObservableCollection<ToDoList>()},
-                  new ToDoList{Name="d", Image="",SubCollection=new ObservableCollection<ToDoList>()}
+                  new ToDoList{Name="d", Image="",SubCollection=new ObservableCollection<ToDoList>() }
                 }
                 },
                 new ToDoList{Name="e",Image="/TaskApplication;component/Images/ToDoListIcons/img4.jpg", SubCollection=new ObservableCollection<ToDoList>()
@@ -66,6 +73,7 @@ namespace TaskApplication.Services
                 },
             }
             });
+
         }
 
         public void AddItem(ToDoList item)

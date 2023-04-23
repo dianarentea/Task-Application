@@ -2,18 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
+using TaskApplication.Helpers;
+
 
 namespace TaskApplication.Models
 {
     internal class Task:BaseVM
     {
-        public enum TaskPriority
-        {
-            Low,
-            Medium,
-            High
-        }
         public enum CategoryType 
         {   Work, 
             School,
@@ -27,7 +22,7 @@ namespace TaskApplication.Models
             Major,
             None
         }
-        public Task(string name, string description, string status, CategoryType category,TaskPriority priority, DateTime deadline, PriorityType type, bool done)
+        public Task(string name, string description,  string status, CategoryType category, string priority, DateTime deadline, PriorityType type, bool done)
         {
             Name = name;
             Status = status;
@@ -45,7 +40,7 @@ namespace TaskApplication.Models
             get { return name; }
             set
             {
-                Name = value;
+                name = value;
                 NotifyPropertyChanged("Name");
             }
         }
@@ -70,8 +65,8 @@ namespace TaskApplication.Models
                 NotifyPropertyChanged("Status");
             }
         }
-        private TaskPriority priority;
-        public TaskPriority Priority
+        private string priority;
+        public string Priority
         {
             get { return priority; }
             set

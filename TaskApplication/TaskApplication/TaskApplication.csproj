@@ -75,8 +75,10 @@
     </Compile>
     <Compile Include="Helpers\RelayCommand.cs" />
     <Compile Include="Models\Task.cs" />
+    <Compile Include="Services\TaskManager.cs" />
     <Compile Include="Services\ToDoListManager.cs" />
     <Compile Include="ToDoListViewModel.cs" />
+    <Compile Include="ViewModels\AddNewTaskViewModel.cs" />
     <Compile Include="ViewModels\AddNewTDLViewModel.cs" />
     <Page Include="AddTDL.xaml">
       <SubType>Designer</SubType>
