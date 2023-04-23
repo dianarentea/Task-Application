@@ -1,0 +1,17 @@
+D:\Facultate\MVP\Task-Application\TaskApplication\TaskApplication\obj\Debug\TaskApplication.csproj.AssemblyReference.cache
+D:\Facultate\MVP\Task-Application\TaskApplication\TaskApplication\obj\Debug\TaskApplication.csproj.SuggestedBindingRedirects.cache
+D:\Facultate\MVP\Task-Application\TaskApplication\TaskApplication\obj\Debug\MainWindow.g.cs
+D:\Facultate\MVP\Task-Application\TaskApplication\TaskApplication\obj\Debug\App.g.cs
+D:\Facultate\MVP\Task-Application\TaskApplication\TaskApplication\obj\Debug\GeneratedInternalTypeHelper.g.cs
+D:\Facultate\MVP\Task-Application\TaskApplication\TaskApplication\obj\Debug\TaskApplication_MarkupCompile.cache
+D:\Facultate\MVP\Task-Application\TaskApplication\TaskApplication\obj\Debug\TaskApplication_MarkupCompile.lref
+D:\Facultate\MVP\Task-Application\TaskApplication\TaskApplication\obj\Debug\TaskApplication.exe
+D:\Facultate\MVP\Task-Application\TaskApplication\TaskApplication\obj\Debug\TaskApplication.pdb
+D:\Facultate\MVP\Task-Application\TaskApplication\TaskApplication\bin\Debug\TaskApplication.exe.config
+D:\Facultate\MVP\Task-Application\TaskApplication\TaskApplication\bin\Debug\TaskApplication.exe
+D:\Facultate\MVP\Task-Application\TaskApplication\TaskApplication\bin\Debug\TaskApplication.pdb
+D:\Facultate\MVP\Task-Application\TaskApplication\TaskApplication\obj\Debug\MainWindow.baml
+D:\Facultate\MVP\Task-Application\TaskApplication\TaskApplication\obj\Debug\TaskApplication.g.resources
+D:\Facultate\MVP\Task-Application\TaskApplication\TaskApplication\obj\Debug\TaskApplication.Properties.Resources.resources
+D:\Facultate\MVP\Task-Application\TaskApplication\TaskApplication\obj\Debug\TaskApplication.csproj.GenerateResource.cache
+D:\Facultate\MVP\Task-Application\TaskApplication\TaskApplication\obj\Debug\TaskApplication.csproj.CoreCompileInputs.cache
