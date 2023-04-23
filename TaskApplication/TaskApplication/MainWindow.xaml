@@ -125,7 +125,7 @@
         </ListView>
 
         <!-- TextBlock for task counts by deadline -->
-        <TextBlock Name="StatisticsTextBlock"  Grid.Row="2" Grid.Column="0" Margin="10" Visibility="Collapsed">
+        <TextBlock Name="StatisticsTextBlock"  Grid.Row="2" Grid.Column="0" Margin="10" DataContext="{Binding StatisticsManager}">
     <Grid>
     <Grid.ColumnDefinitions>
         <ColumnDefinition Width="Auto"/>
@@ -139,19 +139,19 @@
         <RowDefinition Height="25"/>
        </Grid.RowDefinitions>
     <Label Grid.Column="0" Content="Done tasks: " Height="25"  />
-    <Label Grid.Column="1" Content="0" Width="38" Height="25" Name="DoneTasksLabel" />
+    <Label Grid.Column="1" Content="{Binding CompletedCount}" Width="38" Height="25" Name="DoneTasksLabel" />
         
     <Label Grid.Column="0" Content="Tasks to be done: " Height="25" Grid.Row="1" />
-    <Label Grid.Column="1" Content="0" Width="38" Height="25" Name="ToDoTasksLabel" Grid.Row="1"/>
+    <Label Grid.Column="1" Content="{Binding AllCount}" Width="38" Height="25" Name="ToDoTasksLabel" Grid.Row="1"/>
         
     <Label Grid.Column="0" Content="Tasks due today: " Height="25" Grid.Row="2" />
-    <Label Grid.Column="1" Content="0" Width="38" Height="25" Name="DueTodayTasksLabel" Grid.Row="2"/>
+    <Label Grid.Column="1" Content="{Binding DueTodayCount}" Width="38" Height="25" Name="DueTodayTasksLabel" Grid.Row="2"/>
         
     <Label Grid.Column="0" Content="Tasks due tomorrow: " Height="25" Grid.Row="3" />
-    <Label Grid.Column="1" Content="0" Width="38" Height="25" Name="DueTomorrowTasksLabel" Grid.Row="3"/>
+    <Label Grid.Column="1" Content="{Binding DueTomorrowCount}" Width="38" Height="25" Name="DueTomorrowTasksLabel" Grid.Row="3"/>
         
     <Label Grid.Column="0" Content="Tasks overdue: " Height="25" Grid.Row="4" />
-    <Label Grid.Column="1" Content="0" Width="38" Height="25" Name="OverdueTasksLabel" Grid.Row="4"/>
+    <Label Grid.Column="1" Content="{Binding OverdueCount}" Width="38" Height="25" Name="OverdueTasksLabel" Grid.Row="4"/>
 </Grid>
         </TextBlock>
 

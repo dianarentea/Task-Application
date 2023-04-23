@@ -22,14 +22,50 @@ namespace TaskApplication
         public ToDoListManager manager;
         public ToDoList doList;
         public TaskManager taskManager;
+        public StatisticsManager statisticsManager;
         public ToDoListViewModel()
         {
             manager = new ToDoListManager();
             taskManager = new TaskManager();
+            statisticsManager = new StatisticsManager();
             ItemsCollection = manager.ItemsCollection;
             TaskCollection=taskManager.TaskList;
+            StatisticsManager=statisticsManager.Statistics;
           
         }
+      public ICommand UpdateStatisticsCommand=>new RelayCommand(UpdateStatistics);
+        public ICommand OpenAddToDoListWindowCommand => new RelayCommand(OpenAddToDoListWindow);
+        public ICommand OpenAddTaskWindowCommand=>new RelayCommand(OpenAddTaskWindow);
+        public ICommand RemoveTaskCommand => new RelayCommand(RemoveTask);
+        private void OpenAddToDoListWindow()
+        {
+            AddTDL addTDLWindow = new AddTDL();
+            AddNewTDLViewModel addNewTDLViewModel = new AddNewTDLViewModel(manager);
+            addTDLWindow.DataContext = addNewTDLViewModel;
+            addTDLWindow.ShowDialog();
+           
+             
+        }
+        private void OpenAddTaskWindow()
+        {
+            AddTask addTaskWindow=new AddTask();
+            AddNewTaskViewModel addNewTaskViewModel = new AddNewTaskViewModel(taskManager);
+            addTaskWindow.DataContext = addNewTaskViewModel;
+            addTaskWindow.ShowDialog();
+            //UpdateStatistics();
+            //StatisticsManager = statisticsManager.Statistics;
+
+        }
+        private void RemoveTask()
+        {
+            if(SelectedTask!=null)
+            TaskCollection.Remove(SelectedTask);
+        }
+        private void UpdateStatistics()
+        {
+           statisticsManager.UpdateStats();
+        }
+        public Statistics StatisticsManager { get; set; }
         private ObservableCollection<ToDoList> _itemsCollection;
         public ObservableCollection<ToDoList> ItemsCollection
         {
@@ -61,30 +97,6 @@ namespace TaskApplication
             }
         }
 
-        public ICommand OpenAddToDoListWindowCommand => new RelayCommand(OpenAddToDoListWindow);
-        public ICommand OpenAddTaskWindowCommand=>new RelayCommand(OpenAddTaskWindow);
-        public ICommand RemoveTaskCommand => new RelayCommand(RemoveTask);
-        private void OpenAddToDoListWindow()
-        {
-            AddTDL addTDLWindow = new AddTDL();
-            AddNewTDLViewModel addNewTDLViewModel = new AddNewTDLViewModel(manager);
-            addTDLWindow.DataContext = addNewTDLViewModel;
-            addTDLWindow.ShowDialog();
-             
-        }
-        private void OpenAddTaskWindow()
-        {
-            AddTask addTaskWindow=new AddTask();
-            AddNewTaskViewModel addNewTaskViewModel = new AddNewTaskViewModel(taskManager);
-            addTaskWindow.DataContext = addNewTaskViewModel;
-            addTaskWindow.ShowDialog();
-
-        }
-        private void RemoveTask()
-        {
-            if(SelectedTask!=null)
-            TaskCollection.Remove(SelectedTask);
-        }
        
 
 
