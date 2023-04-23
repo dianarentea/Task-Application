@@ -1,65 +1,57 @@
-﻿using System;
+﻿using GalaSoft.MvvmLight.Command;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Data;
+using System.Windows.Input;
+using TaskApplication.Helpers;
 using TaskApplication.Models;
+using TaskApplication.Services;
+using TaskApplication.ViewModels;
+using RelayCommand = TaskApplication.Helpers.RelayCommand;
 
 namespace TaskApplication
 {
     internal class ToDoListViewModel : BaseVM
     {
+        public ToDoListManager manager;
+        public ToDoList doList;
         public ToDoListViewModel()
         {
-            ItemsCollection = new ObservableCollection<ToDoList>();
-            ItemsCollection.Add(new ToDoList
-            {
-                Name = "Item1",
-                SubCollection = new ObservableCollection<ToDoList>()
-                {
-                    new ToDoList{Name="b", SubCollection=new ObservableCollection<ToDoList>()
-                    { new ToDoList() { Name="c", SubCollection=new ObservableCollection<ToDoList>()},
-                      new ToDoList{Name="d", SubCollection=new ObservableCollection<ToDoList>()}
-                    }
-                    },
-                    new ToDoList{Name="e", SubCollection=new ObservableCollection<ToDoList>()
-                    {
-                        new ToDoList{Name="f", SubCollection=new ObservableCollection<ToDoList>()},
-                        new ToDoList{Name="g", SubCollection=new ObservableCollection<ToDoList>()}
-                    }
-                    }
+            manager = new ToDoListManager();
+            ItemsCollection = manager.ItemsCollection;
 
-                }
-            });
-            ItemsCollection.Add(new ToDoList()
-            {
-                Name = "Item2",
-                SubCollection = new ObservableCollection<ToDoList>()
-                {
-                    new ToDoList{Name="h", SubCollection=new ObservableCollection<ToDoList>()
-                    {
-                        new ToDoList{Name="i", SubCollection=new ObservableCollection<ToDoList>()},
-                        new ToDoList{Name="j", SubCollection=new ObservableCollection<ToDoList>()}
-                    }
-                    },
-                }
-            });
-
+          
         }
-        public ObservableCollection<ToDoList> ItemsCollection { get; set; }
-        private ToDoList selectedItem;
-        public ToDoList SelectedItem
+        private ObservableCollection<ToDoList> _itemsCollection;
+        public ObservableCollection<ToDoList> ItemsCollection
         {
-            get
-            {
-                return selectedItem;
-            }
+            get { return _itemsCollection; }
             set
             {
-                selectedItem = value;
-                NotifyPropertyChanged("SelectedItem");
+                _itemsCollection = value;
+                NotifyPropertyChanged(nameof(ItemsCollection));
             }
         }
+       
+        public ICommand OpenAddToDoListWindowCommand => new RelayCommand(OpenAddToDoListWindow);
+        private void OpenAddToDoListWindow()
+        {
+            AddTDL AddTDLWindow = new AddTDL();
+            AddNewTDLViewModel addNewTDLViewModel = new AddNewTDLViewModel(manager);
+            AddTDLWindow.DataContext = addNewTDLViewModel;
+            AddTDLWindow.ShowDialog();
+             
+        }
+       
+
+
+
     }
+
+
 }

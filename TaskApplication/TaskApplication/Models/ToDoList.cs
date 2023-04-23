@@ -24,5 +24,17 @@ namespace TaskApplication.Models
                 NotifyPropertyChanged("Name");
             }
         }
+        private string image;
+        public string Image
+        {
+            get { return image; }
+            set
+            {
+                image = value;
+                NotifyPropertyChanged("Image");
+            }
+        }
+       
+
     }
 }

@@ -7,51 +7,26 @@ using System.Windows.Input;
 
 namespace TaskApplication.Helpers
 {
-    internal class RelayCommand<T>:ICommand
+    internal class RelayCommand : ICommand
     {
-        private Action<T> commandTask;
-        private Predicate<T> canExecuteTask;
+        private readonly Action _execute;
+        private readonly Func<bool> _canExecute;
 
-        public RelayCommand(Action<T> workToDo, Predicate<T> canExecute)
+        public RelayCommand(Action execute, Func<bool> canExecute = null)
         {
-            commandTask = workToDo;
-            canExecuteTask = canExecute;
-        }
-
-        public RelayCommand(Action<T> workToDo)
-            : this(workToDo, DefaultCanExecute)
-        {
-            commandTask = workToDo;
-        }
-
-        private static bool DefaultCanExecute(T parameter)
-        {
-            return true;
-        }
-
-        public bool CanExecute(object parameter)
-        {
-            return canExecuteTask != null && canExecuteTask((T)parameter);
+            _execute = execute ?? throw new ArgumentNullException(nameof(execute));
+            _canExecute = canExecute;
         }
 
         public event EventHandler CanExecuteChanged
         {
-            add
-            {
-                //+=asociaza un handler la un eveniment
-                CommandManager.RequerySuggested += value;
-            }
-
-            remove
-            {
-                //-=sterge un handler de la un eveniment
-                CommandManager.RequerySuggested -= value;
-            }
+            add { CommandManager.RequerySuggested += value; }
+            remove { CommandManager.RequerySuggested -= value; }
         }
 
-        public void Execute(object parameter)
-        {
-            commandTask((T)parameter);
-        }
+        public bool CanExecute(object parameter) => _canExecute == null || _canExecute();
+
+        public void Execute(object parameter) => _execute();
     }
+
 }

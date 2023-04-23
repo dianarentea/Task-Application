@@ -5,84 +5,88 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:vm="clr-namespace:TaskApplication"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="550" Width="800">
     <Window.DataContext>
         <vm:ToDoListViewModel/>
     </Window.DataContext>
     <Grid Name="TaskViewGrid" >
-            <Grid.RowDefinitions>
-                <RowDefinition Height="auto"/>
-                <RowDefinition Height="350"/>
-                <RowDefinition Height="*"/>
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="200"/>
-                <ColumnDefinition/>
-            </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="350"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="200"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
 
-            <!-- Menu bar -->
-            <Menu Grid.Row="0" Grid.ColumnSpan="2" >
-                <MenuItem Header="File">
-                    <MenuItem Header="Open Database"/>
-                    <MenuItem Header="New Database"/>
-                    <MenuItem Header="Archive Database"/>
-                    <Separator/>
-                    <MenuItem Header="Exit" />
+        <!-- Menu bar -->
+        <Menu Grid.Row="0" Grid.ColumnSpan="2" >
+            <MenuItem Header="File">
+                <MenuItem Header="Open Database"/>
+                <MenuItem Header="New Database"/>
+                <MenuItem Header="Archive Database"/>
+                <Separator/>
+                <MenuItem Header="Exit" />
+            </MenuItem>
+            <MenuItem Header="TDL">
+                <MenuItem Header="Add Root TDL" Command="{Binding OpenAddToDoListWindowCommand}" />
+                <MenuItem Header="Add Sub-TDL"/>
+                <MenuItem Header="Edit"/>
+                <MenuItem Header="Delete"/>
+                <Separator/>
+                <MenuItem Header="Move Up" />
+                <MenuItem Header="Move Down" />
+                <MenuItem Header="Change Path"/>
+            </MenuItem>
+            <MenuItem Header="Task">
+                <MenuItem Header="Add" />
+                <MenuItem Header="Edit" />
+                <MenuItem Header="Delete" />
+                <MenuItem Header="Set Done" />
+                <Separator/>
+                <MenuItem Name="MoveUpMenuItem" Header="Move Up"/>
+                <MenuItem Name="MoveDownMenuItem" Header="Move Down" />
+                <Separator/>
+                <MenuItem Header="Manage Category"/>
+                <MenuItem Header="Find Task" />
+            </MenuItem>
+            <MenuItem Header="View">
+                <MenuItem Header="Sort">
+                    <MenuItem Header="By Priority"  />
+                    <MenuItem Header="By Deadline"  />
                 </MenuItem>
-                <MenuItem Header="TDL">
-                    <MenuItem Header="Add Root TDL" />
-                    <MenuItem Header="Add Sub-TDL"/>
-                    <MenuItem Header="Edit"/>
-                    <MenuItem Header="Delete"/>
-                    <Separator/>
-                    <MenuItem Header="Move Up" />
-                    <MenuItem Header="Move Down" />
-                    <MenuItem Header="Change Path"/>
-                </MenuItem>
-                <MenuItem Header="Task">
-                    <MenuItem Header="Add" />
-                    <MenuItem Header="Edit" />
-                    <MenuItem Header="Delete" />
-                    <MenuItem Header="Set Done" />
-                    <Separator/>
-                    <MenuItem Name="MoveUpMenuItem" Header="Move Up"/>
-                    <MenuItem Name="MoveDownMenuItem" Header="Move Down" />
-                    <Separator/>
-                    <MenuItem Header="Manage Category"/>
-                    <MenuItem Header="Find Task" />
-                </MenuItem>
-                <MenuItem Header="View">
-                    <MenuItem Header="Sort">
-                        <MenuItem Header="By Priority"  />
-                        <MenuItem Header="By Deadline"  />
+                <MenuItem Header="Filter">
+                    <MenuItem Header="By Category">
+                        <MenuItem Header="Work" />
+                        <MenuItem Header="Home" />
+                        <MenuItem Header="School" />
+                        <MenuItem Header="Other" />
                     </MenuItem>
-                    <MenuItem Header="Filter">
-                        <MenuItem Header="By Category">
-                            <MenuItem Header="Work" />
-                            <MenuItem Header="Home" />
-                            <MenuItem Header="School" />
-                            <MenuItem Header="Other" />
-                        </MenuItem>
-                        <MenuItem Header="Done tasks" />
-                        <MenuItem Header="Overdue tasks" />
-                        <MenuItem Header="To-Do tasks"/>
-                        <MenuItem Header="All tasks" />
-                    </MenuItem>
-                    <MenuItem Header="Statistics"/>
+                    <MenuItem Header="Done tasks" />
+                    <MenuItem Header="Overdue tasks" />
+                    <MenuItem Header="To-Do tasks"/>
+                    <MenuItem Header="All tasks" />
                 </MenuItem>
-                <MenuItem Header="Help">
-                    <MenuItem Header="About"/>
-                </MenuItem>
-            </Menu>
+                <MenuItem Header="Statistics"/>
+            </MenuItem>
+            <MenuItem Header="Help">
+                <MenuItem Header="About"/>
+            </MenuItem>
+        </Menu>
 
-            <!-- ListView for folder list -->
-            <TreeView Name="FolderList" Grid.Row="1" Grid.Column="0" ItemsSource="{Binding ItemsCollection}">
-                <TreeView.ItemTemplate>
-                    <HierarchicalDataTemplate ItemsSource="{Binding SubCollection}">
-                        <TextBlock Text="{Binding Name}"/>
-                    </HierarchicalDataTemplate>
-                </TreeView.ItemTemplate>
-            </TreeView>
+        <!-- ListView for folder list -->
+        <TreeView Name="FolderList" Grid.Row="1" Grid.Column="0" ItemsSource="{Binding ItemsCollection}">
+            <TreeView.ItemTemplate>
+                <HierarchicalDataTemplate ItemsSource="{Binding SubCollection}">
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="{Binding Image}" Width="30" Height="30"/>
+                    <TextBlock  Text="{Binding Name}">
+                    </TextBlock>
+                    </StackPanel>
+                </HierarchicalDataTemplate>
+            </TreeView.ItemTemplate>
+        </TreeView>
 
-        </Grid>
+    </Grid>
 </Window>

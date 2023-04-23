@@ -15,3 +15,17 @@ D:\Facultate\MVP\Task-Application\TaskApplication\TaskApplication\obj\Debug\Task
 D:\Facultate\MVP\Task-Application\TaskApplication\TaskApplication\obj\Debug\TaskApplication.Properties.Resources.resources
 D:\Facultate\MVP\Task-Application\TaskApplication\TaskApplication\obj\Debug\TaskApplication.csproj.GenerateResource.cache
 D:\Facultate\MVP\Task-Application\TaskApplication\TaskApplication\obj\Debug\TaskApplication.csproj.CoreCompileInputs.cache
+D:\Facultate\MVP\Task-Application\TaskApplication\TaskApplication\bin\Debug\CommonServiceLocator.dll
+D:\Facultate\MVP\Task-Application\TaskApplication\TaskApplication\bin\Debug\GalaSoft.MvvmLight.dll
+D:\Facultate\MVP\Task-Application\TaskApplication\TaskApplication\bin\Debug\GalaSoft.MvvmLight.Extras.dll
+D:\Facultate\MVP\Task-Application\TaskApplication\TaskApplication\bin\Debug\GalaSoft.MvvmLight.Platform.dll
+D:\Facultate\MVP\Task-Application\TaskApplication\TaskApplication\bin\Debug\System.Windows.Interactivity.dll
+D:\Facultate\MVP\Task-Application\TaskApplication\TaskApplication\bin\Debug\GalaSoft.MvvmLight.pdb
+D:\Facultate\MVP\Task-Application\TaskApplication\TaskApplication\bin\Debug\GalaSoft.MvvmLight.xml
+D:\Facultate\MVP\Task-Application\TaskApplication\TaskApplication\bin\Debug\GalaSoft.MvvmLight.Extras.pdb
+D:\Facultate\MVP\Task-Application\TaskApplication\TaskApplication\bin\Debug\GalaSoft.MvvmLight.Extras.xml
+D:\Facultate\MVP\Task-Application\TaskApplication\TaskApplication\bin\Debug\GalaSoft.MvvmLight.Platform.pdb
+D:\Facultate\MVP\Task-Application\TaskApplication\TaskApplication\bin\Debug\GalaSoft.MvvmLight.Platform.xml
+D:\Facultate\MVP\Task-Application\TaskApplication\TaskApplication\obj\Debug\TaskApplication.csproj.CopyComplete
+D:\Facultate\MVP\Task-Application\TaskApplication\TaskApplication\obj\Debug\AddTDL.g.cs
+D:\Facultate\MVP\Task-Application\TaskApplication\TaskApplication\obj\Debug\AddTDL.baml
