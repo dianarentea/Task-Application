@@ -40,7 +40,8 @@ namespace TaskApplication
         public ICommand UpdateTaskDoneCommand => new RelayCommand<bool>(UpdateTaskDone);
         public ICommand OpenFindTaskWindowCommand => new RelayCommand(OpenFindTaskWindow);
         public ICommand ExitApplicationCommand=> new RelayCommand(ExitApplication);
-
+        public ICommand MoveUpTaskCommand=>new RelayCommand(MoveUpTask);
+        public ICommand MoveDownTaskCommand=>new RelayCommand(MoveDownTask);
         private void OpenAddToDoListWindow()
         {
             AddTDL addTDLWindow = new AddTDL();
@@ -84,8 +85,14 @@ namespace TaskApplication
         {
             Application.Current.Shutdown();
         }
-
-
+        private void MoveUpTask()
+        {
+            taskManager.MoveSelectedItem(-1, SelectedTask);
+        }
+        private void MoveDownTask()
+        {
+            taskManager.MoveSelectedItem(1, SelectedTask);
+        }
         private ObservableCollection<ToDoList> _itemsCollection;
         public ObservableCollection<ToDoList> ItemsCollection
         {

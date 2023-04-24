@@ -35,5 +35,15 @@ namespace TaskApplication.Services
             task.Done = true;
             NotifyPropertyChanged(nameof(TaskList));
         }
+        public void MoveSelectedItem(int direction, Task task)
+        {
+            if (task == null || TaskList.Count < 2)
+                return;
+            int oldIndex = TaskList.IndexOf(task);
+            int newIndex = oldIndex + direction;
+            if (newIndex < 0 || newIndex >= TaskList.Count)
+                return;
+            TaskList.Move(oldIndex, newIndex);
+        }
     }
 }

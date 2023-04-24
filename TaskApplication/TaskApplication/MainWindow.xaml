@@ -37,8 +37,8 @@
                 <MenuItem Header="Edit"/>
                 <MenuItem Header="Delete"/>
                 <Separator/>
-                <MenuItem Header="Move Up" />
-                <MenuItem Header="Move Down" />
+                <MenuItem Header="Move Up" Command="{Binding MoveUpTaskCommand}" />
+                <MenuItem Header="Move Down" Command="{Binding MoveDownTaskCommand}"/>
                 <MenuItem Header="Change Path"/>
             </MenuItem>
             <MenuItem Header="Task">
