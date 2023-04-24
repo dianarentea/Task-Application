@@ -72,7 +72,7 @@
                 </MenuItem>
             </MenuItem>
             <MenuItem Header="Help">
-                <MenuItem Header="About"/>
+                <MenuItem Header="About" Command="{Binding ShowAboutStudentCommand}"/>
             </MenuItem>
         </Menu>
 
@@ -121,7 +121,7 @@
                     <GridViewColumn Header="Priority" Width="100" DisplayMemberBinding="{Binding Priority}" />
                     <GridViewColumn Header="Type" Width="50" DisplayMemberBinding="{Binding Type}" />
                     <GridViewColumn Header="Deadline" Width="160" DisplayMemberBinding="{Binding Deadline}" />
-                    <GridViewColumn Header="Category" Width="120" DisplayMemberBinding="{Binding Category}"/>
+                    <GridViewColumn Header="Category" Width="100" DisplayMemberBinding="{Binding Category}"/>
                 </GridView>
             </ListView.View>
         </ListView>

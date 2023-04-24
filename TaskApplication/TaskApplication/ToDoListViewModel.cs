@@ -56,6 +56,7 @@ namespace TaskApplication
         public ICommand FilterByOverdueCategoryCommand => new RelayCommand(FilterByOverdueCategory);
         public ICommand FilterByToDoCategoryCommand => new RelayCommand(FilterByToDoCategory);
         public ICommand ShwoAllTasksCommand=> new RelayCommand(ShowAllTasks);
+        public ICommand ShowAboutStudentCommand=> new RelayCommand(ShowAboutStudent);
       
         
         //actiuni pe TDL-uri
@@ -208,7 +209,10 @@ namespace TaskApplication
         {
             Application.Current.Shutdown();
         }   
-       
+       private void ShowAboutStudent()
+        {
+            MessageBox.Show("Rentea Diana-Andreeea\nGroup 213\ndiana.rentea@student.unitbv.ro", "Informative box", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
         private ObservableCollection<ToDoList> _itemsCollection;
         public ObservableCollection<ToDoList> ItemsCollection
         {
