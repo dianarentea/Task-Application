@@ -112,7 +112,7 @@
                     <GridViewColumn Header="Check" Width="40" >
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <CheckBox Name="DoneCheckBox" IsChecked="{Binding Done}" />
+                                <CheckBox Name="DoneCheckBox" IsChecked="{Binding Done}"  />
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
@@ -125,7 +125,7 @@
         </ListView>
 
         <!-- TextBlock for task counts by deadline -->
-        <TextBlock Name="StatisticsTextBlock"  Grid.Row="2" Grid.Column="0" Margin="10" DataContext="{Binding StatisticsManager}">
+        <TextBlock Name="StatisticsTextBlock"  Grid.Row="2" Grid.Column="0" Margin="10" DataContext="{Binding StatisticsCollection}">
     <Grid>
     <Grid.ColumnDefinitions>
         <ColumnDefinition Width="Auto"/>

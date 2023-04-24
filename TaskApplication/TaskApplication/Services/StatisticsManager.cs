@@ -8,19 +8,11 @@ namespace TaskApplication.Services
 {
     internal class StatisticsManager:BaseVM
     {
+        TaskManager taskManager;
         public StatisticsManager()
         {
             Statistics = new Statistics();
-        }
-        public Statistics Statistics { get; set; }
-        TaskManager taskManager;
-        public void UpdateStats()
-        {
-            Statistics.DueTodayCount = 0;
-            Statistics.DueTomorrowCount = 0;
-            Statistics.OverdueCount = 0;
-            Statistics.CompletedCount = 0;
-            Statistics.AllCount = 0;
+            taskManager = new TaskManager();
             foreach (var task in taskManager.TaskList)
             {
                 if (task.Deadline.Date == DateTime.Today)
@@ -41,6 +33,33 @@ namespace TaskApplication.Services
                 }
                 Statistics.AllCount++;
             }
+        }
+        public Statistics Statistics { get; set; }
+        
+        public void  IncreaseAllCount()
+        {
+             Statistics.AllCount++;
+        }
+        public void DecreaseAllCount(Task task)
+        {
+            if (task.Deadline == DateTime.Today)
+            {
+                Statistics.DueTodayCount--;
+            }
+            else if (task.Deadline == DateTime.Today.AddDays(1))
+            {
+                Statistics.DueTomorrowCount--;
+            }
+            else if (task.Deadline < DateTime.Today)
+            {
+                Statistics.OverdueCount--;
+            }
+            Statistics.AllCount--;
+
+        }
+        public void IncreaseCompletedCount()
+        {
+            Statistics.CompletedCount++;
         }
     }
 }

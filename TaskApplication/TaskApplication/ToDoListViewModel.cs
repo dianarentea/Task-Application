@@ -30,13 +30,14 @@ namespace TaskApplication
             statisticsManager = new StatisticsManager();
             ItemsCollection = manager.ItemsCollection;
             TaskCollection=taskManager.TaskList;
-            StatisticsManager=statisticsManager.Statistics;
+            StatisticsCollection=statisticsManager.Statistics;
           
         }
-      public ICommand UpdateStatisticsCommand=>new RelayCommand(UpdateStatistics);
         public ICommand OpenAddToDoListWindowCommand => new RelayCommand(OpenAddToDoListWindow);
         public ICommand OpenAddTaskWindowCommand=>new RelayCommand(OpenAddTaskWindow);
         public ICommand RemoveTaskCommand => new RelayCommand(RemoveTask);
+        public ICommand UpdateTaskDoneCommand => new RelayCommand<bool>(UpdateTaskDone);
+
         private void OpenAddToDoListWindow()
         {
             AddTDL addTDLWindow = new AddTDL();
@@ -52,20 +53,25 @@ namespace TaskApplication
             AddNewTaskViewModel addNewTaskViewModel = new AddNewTaskViewModel(taskManager);
             addTaskWindow.DataContext = addNewTaskViewModel;
             addTaskWindow.ShowDialog();
-            //UpdateStatistics();
-            //StatisticsManager = statisticsManager.Statistics;
-
+            statisticsManager.IncreaseAllCount();
         }
         private void RemoveTask()
         {
             if(SelectedTask!=null)
+            statisticsManager.DecreaseAllCount(SelectedTask);
             TaskCollection.Remove(SelectedTask);
         }
-        private void UpdateStatistics()
+        private void UpdateTaskDone(bool done)
         {
-           statisticsManager.UpdateStats();
+            if (SelectedTask != null)
+            {
+                SelectedTask.Done = done;
+                taskManager.UpdateDone(SelectedTask);
+                statisticsManager.IncreaseCompletedCount();
+            }
         }
-        public Statistics StatisticsManager { get; set; }
+
+
         private ObservableCollection<ToDoList> _itemsCollection;
         public ObservableCollection<ToDoList> ItemsCollection
         {
@@ -86,6 +92,7 @@ namespace TaskApplication
                 NotifyPropertyChanged(nameof(TaskCollection));
             }
         }
+
         private Task _selectedTask;
         public Task SelectedTask
         {
@@ -94,6 +101,16 @@ namespace TaskApplication
             {
                 _selectedTask = value;
                 NotifyPropertyChanged(nameof(SelectedTask));
+            }
+        }
+        private Statistics _statisticsCollection;
+        public Statistics StatisticsCollection
+        {
+            get { return _statisticsCollection; }
+            set
+            {
+                _statisticsCollection = value;
+                NotifyPropertyChanged(nameof(Statistics));
             }
         }
 
