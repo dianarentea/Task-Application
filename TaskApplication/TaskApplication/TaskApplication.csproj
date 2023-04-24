@@ -76,6 +76,9 @@
     <Compile Include="AddTDL.xaml.cs">
       <DependentUpon>AddTDL.xaml</DependentUpon>
     </Compile>
+    <Compile Include="EditTask.xaml.cs">
+      <DependentUpon>EditTask.xaml</DependentUpon>
+    </Compile>
     <Compile Include="FindTask.xaml.cs">
       <DependentUpon>FindTask.xaml</DependentUpon>
     </Compile>
@@ -88,12 +91,17 @@
     <Compile Include="ToDoListViewModel.cs" />
     <Compile Include="ViewModels\AddNewTaskViewModel.cs" />
     <Compile Include="ViewModels\AddNewTDLViewModel.cs" />
+    <Compile Include="ViewModels\EditTaskViewModel.cs" />
     <Compile Include="ViewModels\FindTaskViewModel.cs" />
     <Page Include="AddTask.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="AddTDL.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="EditTask.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

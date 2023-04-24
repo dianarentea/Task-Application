@@ -1,0 +1,50 @@
+﻿<Window x:Class="TaskApplication.EditTask"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TaskApplication"
+        mc:Ignorable="d"
+        Title="EditTask" Height="450" Width="800">
+    <Grid>
+
+
+        <StackPanel Name="EditTaskStackPanel" Width="300" HorizontalAlignment="Center" Margin="0,51,0,8" Height="NaN" DataContext="{Binding SelectedTask}">
+            <Label Content="Name" Height="24" />
+            <TextBox x:Name="txtName"  Text="{Binding Name}"/>
+            <Label Content="Description" />
+            <TextBox x:Name="txtDescription" Text="{Binding Description}" />
+            <Label Content="Status" />
+            <ComboBox Name="CmbStatus" SelectedItem="{Binding SelectedStatus}">
+                <ComboBoxItem IsSelected="True" Content="None"/>
+                <ComboBoxItem Content="Created"/>
+                <ComboBoxItem Content="In Progress"/>
+                <ComboBoxItem Content="Done"/>
+            </ComboBox>
+            <Label Content="Priority" />
+            <ComboBox Name="CmbPriority" SelectedItem="{Binding SelectedPriority}">
+                <ComboBoxItem IsSelected="True" Content="None"/>
+                <ComboBoxItem Content="High"/>
+                <ComboBoxItem Content="Medium"/>
+                <ComboBoxItem Content="Low"/>
+            </ComboBox>
+            <Label Content="Deadline" />
+            <DatePicker x:Name="dpDeadline" SelectedDate="{Binding SelectedDate}" />
+            <Label Content="Type" />
+            <ComboBox Name="CmbType" SelectedItem="{Binding SelectedType}">
+                <ComboBoxItem IsSelected="True" Content="None"/>
+                <ComboBoxItem Content="Major task"/>
+                <ComboBoxItem Content="Minor task"/>
+                <ComboBoxItem Content="Medium task"/>
+            </ComboBox>
+            <Label Content="Category" />
+            <ComboBox Name="CmbCategory" SelectedItem="{Binding SelectedCategory}">
+                <ComboBoxItem IsSelected="True" Content="Other"/>
+                <ComboBoxItem Content="Work"/>
+                <ComboBoxItem Content="School"/>
+                <ComboBoxItem Content="Personal"/>
+            </ComboBox>
+            <Button x:Name="AddEditedTaskButton" Content="Add editet task" Height="20" Command="{Binding AddEditedTaskCommand}"/>
+        </StackPanel>
+    </Grid>
+</Window>

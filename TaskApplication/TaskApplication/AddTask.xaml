@@ -49,44 +49,6 @@
                 <Button x:Name="AddTaskButton" Content="Add Task" Height="20" Command="{Binding AddTaskCommand}"/>
             </StackPanel>
 
-            <!--Stack panel to edit a task-->
-
-            <!--<StackPanel Name="EditTaskStackPanel" Width="300" HorizontalAlignment="Center" Margin="0,64,0,98" Visibility="Collapsed">
-                <Label Content="Name" Height="24" />
-                <TextBox x:Name="textName" />
-                <Label Content="Description" />
-                <TextBox x:Name="textDescription" />
-                <Label Content="Status" />
-                <ComboBox Name="ComboStatus">
-                    <ComboBoxItem IsSelected="True" Content="None"/>
-                    <ComboBoxItem Content="Created"/>
-                    <ComboBoxItem Content="In Progress"/>
-                    <ComboBoxItem Content="Done"/>
-                </ComboBox>
-                <Label Content="Priority" />
-                <ComboBox Name="ComboPriority">
-                    <ComboBoxItem IsSelected="True" Content="None"/>
-                    <ComboBoxItem Content="High"/>
-                    <ComboBoxItem Content="Medium"/>
-                    <ComboBoxItem Content="Low"/>
-                </ComboBox>
-                <Label Content="Deadline" />
-                <DatePicker x:Name="dataPickerDeadline" />
-                <Label Content="Type" />
-                <ComboBox Name="ComboType">
-                    <ComboBoxItem IsSelected="True" Content="None"/>
-                    <ComboBoxItem Content="Major task"/>
-                    <ComboBoxItem Content="Minor task"/>
-                    <ComboBoxItem Content="Medium task"/>
-                </ComboBox>
-                <Label Content="Category" />
-                <ComboBox Name="ComboCategory">
-                    <ComboBoxItem IsSelected="True" Content="Other"/>
-                    <ComboBoxItem Content="Work"/>
-                    <ComboBoxItem Content="School"/>
-                    <ComboBoxItem Content="Personal"/>
-                </ComboBox>
-                <Button x:Name="EditTaskButton" Content="Add edited task" Click="EditTask_Click" Height="20" />
-            </StackPanel>-->
+           
         </Grid>
 </Window>

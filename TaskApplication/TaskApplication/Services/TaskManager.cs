@@ -25,9 +25,20 @@ namespace TaskApplication.Services
                 
             };
         }
+        public int GetIndex(Task task)
+        {
+            return TaskList.IndexOf(task);
+        }
         public void AddTask(Task task)
         {
             TaskList.Add(task);
+            NotifyPropertyChanged(nameof(TaskList));
+        }
+        public void AddEditedTask(Task task, int index)
+        {
+            if(index>=0 && index<=TaskList.Count-1)
+                TaskList.Insert(index, task);
+
             NotifyPropertyChanged(nameof(TaskList));
         }
         public void UpdateDone(Task task)
@@ -44,6 +55,7 @@ namespace TaskApplication.Services
             if (newIndex < 0 || newIndex >= TaskList.Count)
                 return;
             TaskList.Move(oldIndex, newIndex);
+            NotifyPropertyChanged(nameof (TaskList));
         }
     }
 }

@@ -20,16 +20,16 @@ namespace TaskApplication
 {
     internal class ToDoListViewModel : BaseVM
     {
-        public ToDoListManager manager;
+        public ToDoListManager toDoListManager;
         public ToDoList doList;
         public TaskManager taskManager;
         public StatisticsManager statisticsManager;
         public ToDoListViewModel()
         {
-            manager = new ToDoListManager();
+            toDoListManager = new ToDoListManager();
             taskManager = new TaskManager();
             statisticsManager = new StatisticsManager();
-            ItemsCollection = manager.ItemsCollection;
+            ItemsCollection = toDoListManager.ItemsCollection;
             TaskCollection=taskManager.TaskList;
             StatisticsCollection=statisticsManager.Statistics;
           
@@ -40,16 +40,15 @@ namespace TaskApplication
         public ICommand UpdateTaskDoneCommand => new RelayCommand<bool>(UpdateTaskDone);
         public ICommand OpenFindTaskWindowCommand => new RelayCommand(OpenFindTaskWindow);
         public ICommand ExitApplicationCommand=> new RelayCommand(ExitApplication);
-        public ICommand MoveUpTaskCommand=>new RelayCommand(MoveUpTask);
-        public ICommand MoveDownTaskCommand=>new RelayCommand(MoveDownTask);
+         public ICommand MoveUpTaskCommand => new RelayCommand(MoveUpTask);
+         public ICommand MoveDownTaskCommand => new RelayCommand(MoveDownTask);
+        public ICommand OpenEditTaskCommand=>new RelayCommand(OpenEditTaskWindow);
         private void OpenAddToDoListWindow()
         {
             AddTDL addTDLWindow = new AddTDL();
-            AddNewTDLViewModel addNewTDLViewModel = new AddNewTDLViewModel(manager);
+            AddNewTDLViewModel addNewTDLViewModel = new AddNewTDLViewModel(toDoListManager);
             addTDLWindow.DataContext = addNewTDLViewModel;
             addTDLWindow.ShowDialog();
-           
-             
         }
         private void OpenAddTaskWindow()
         {
@@ -58,6 +57,13 @@ namespace TaskApplication
             addTaskWindow.DataContext = addNewTaskViewModel;
             addTaskWindow.ShowDialog();
             statisticsManager.IncreaseAllCount();
+        }
+        private void OpenEditTaskWindow()
+        {
+            EditTask editTaskWindow = new EditTask();
+            EditTaskViewModel editTaskViewModel = new EditTaskViewModel(SelectedTask, taskManager);
+            editTaskWindow.DataContext = editTaskViewModel;
+            editTaskWindow.ShowDialog();
         }
         private void OpenFindTaskWindow()
         {
