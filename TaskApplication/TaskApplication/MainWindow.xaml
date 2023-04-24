@@ -5,6 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:vm="clr-namespace:TaskApplication"
         mc:Ignorable="d"
+          ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen"
         Title="MainWindow" Height="550" Width="800">
     <Window.DataContext>
         <vm:ToDoListViewModel/>
@@ -27,7 +29,7 @@
                 <MenuItem Header="New Database"/>
                 <MenuItem Header="Archive Database"/>
                 <Separator/>
-                <MenuItem Header="Exit" />
+                <MenuItem Header="Exit" Command="{Binding ExitApplicationCommand}" />
             </MenuItem>
             <MenuItem Header="TDL">
                 <MenuItem Header="Add Root TDL" Command="{Binding OpenAddToDoListWindowCommand}" />
@@ -49,7 +51,7 @@
                 <MenuItem Name="MoveDownMenuItem" Header="Move Down" />
                 <Separator/>
                 <MenuItem Header="Manage Category"/>
-                <MenuItem Header="Find Task" />
+                <MenuItem Header="Find Task" Command="{Binding OpenFindTaskWindowCommand}" />
             </MenuItem>
             <MenuItem Header="View">
                 <MenuItem Header="Sort">

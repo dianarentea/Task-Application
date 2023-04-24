@@ -5,6 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TaskApplication"
         mc:Ignorable="d"
+          ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen"
         Title="FindTask" Height="450" Width="800">
     <Grid>
         <Grid.RowDefinitions>
@@ -16,18 +18,18 @@
         <Label Grid.Row="0" Content="Find Task" HorizontalAlignment="Left" Margin="166,27,0,0" VerticalAlignment="Top" Width="300" FontWeight="Black" FontSize="25"/>
         <Label Grid.Row="0" Content="Find tasks in all to-do lists" HorizontalAlignment="Left" Margin="166,70,0,0" VerticalAlignment="Top" Width="300" FontSize="15"/>
 
-        <TextBox Name="findByNameTextBox" Grid.Row="1" HorizontalAlignment="Left" Margin="136,10,0,0" VerticalAlignment="Top" Width="135" Height="22" TextWrapping="Wrap" Text="{Binding SearchText, Mode=TwoWay}"/>
+        <TextBox Name="findByNameTextBox" Grid.Row="1" HorizontalAlignment="Left" Margin="136,10,0,0" VerticalAlignment="Top" Width="135" Height="22" TextWrapping="Wrap" Text="{Binding Name, Mode=TwoWay}"/>
         <Label Content="Find by name: " HorizontalAlignment="Left" Margin="32,6,0,0" Grid.Row="1" VerticalAlignment="Top" Width="108" FontWeight="Black"/>
 
         <Label Content="Find by deadline: " HorizontalAlignment="Left" Margin="290,6,0,0" Grid.Row="1" VerticalAlignment="Top" Width="108" FontWeight="Black"/>
-        <DatePicker Name="deadlineDatePicker" HorizontalAlignment="Left" Margin="415,10,0,0" Grid.Row="1" VerticalAlignment="Top" Height="22" Width="108"/>
+        <DatePicker Name="deadlineDatePicker" HorizontalAlignment="Left" Margin="415,10,0,0" Grid.Row="1" VerticalAlignment="Top" Height="22" Width="108" SelectedDate="{Binding SelectedDate}"/>
 
         <Label Content="0" Name="numberOfFoundTasksLabel" Height="25" Width="30" Margin="204,55,566,10" Grid.Row="1" FontWeight="Bold"/>
         <Label Content="Number of items found:" Name="textFoundTasksLabel" Height="25" Margin="32,55,606,10" FontWeight="Black" Grid.Row="1" FontSize="12"/>
-        <Button Content="Find" Click="FindTask_Click" Background="AliceBlue" HorizontalAlignment="Left" Margin="654,55,0,0" Grid.Row="1" VerticalAlignment="Top" Height="20" Width="109" Focusable="True" BorderBrush="AliceBlue"/>
-        <Button  Content="Close " Click="CloseWindow_Click" Background="AliceBlue" HorizontalAlignment="Left" Margin="654,12,0,0" VerticalAlignment="Top" Height="20" Width="109" BorderBrush="AliceBlue"/>
+        <Button Content="Find" Command="{Binding FindTaskCommand}" Background="AliceBlue" HorizontalAlignment="Left" Margin="654,55,0,0" Grid.Row="1" VerticalAlignment="Top" Height="20" Width="109" Focusable="True" BorderBrush="AliceBlue"/>
+        <Button  Content="Close " Command="{Binding CloseFindTaskWindowCommand}" Background="AliceBlue" HorizontalAlignment="Left" Margin="654,12,0,0" VerticalAlignment="Top" Height="20" Width="109" BorderBrush="AliceBlue"/>
 
-        <ListView Grid.Row="2" HorizontalAlignment="Center" Name="FindTaskListListView" ItemsSource="{Binding taskList}" Margin="0,19,0,-49">
+        <ListView Grid.Row="2" HorizontalAlignment="Center" Name="FindTaskListListView" ItemsSource="{Binding FilteredTasks}" Margin="0,19,0,-49">
             <ListView.View>
                 <GridView>
                     <GridView.ColumnHeaderContainerStyle>

@@ -60,7 +60,7 @@ namespace TaskApplication.ViewModels
                 NotifyPropertyChanged("SelectedPriority");
             }
         }
-        private DateTime _selectedDate;
+        private DateTime _selectedDate = DateTime.Today;
         public DateTime SelectedDate
         {
             get { return _selectedDate; }

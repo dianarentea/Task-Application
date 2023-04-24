@@ -6,6 +6,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Data;
 using System.Windows.Input;
 using TaskApplication.Helpers;
@@ -37,6 +38,8 @@ namespace TaskApplication
         public ICommand OpenAddTaskWindowCommand=>new RelayCommand(OpenAddTaskWindow);
         public ICommand RemoveTaskCommand => new RelayCommand(RemoveTask);
         public ICommand UpdateTaskDoneCommand => new RelayCommand<bool>(UpdateTaskDone);
+        public ICommand OpenFindTaskWindowCommand => new RelayCommand(OpenFindTaskWindow);
+        public ICommand ExitApplicationCommand=> new RelayCommand(ExitApplication);
 
         private void OpenAddToDoListWindow()
         {
@@ -55,6 +58,13 @@ namespace TaskApplication
             addTaskWindow.ShowDialog();
             statisticsManager.IncreaseAllCount();
         }
+        private void OpenFindTaskWindow()
+        {
+            FindTask findTaskWindow=new FindTask();
+            FindTaskViewModel findTaskViewModel=new FindTaskViewModel(taskManager);
+            findTaskWindow.DataContext = findTaskViewModel;
+            findTaskWindow.ShowDialog();
+        }
         private void RemoveTask()
         {
             if(SelectedTask!=null)
@@ -69,6 +79,10 @@ namespace TaskApplication
                 taskManager.UpdateDone(SelectedTask);
                 statisticsManager.IncreaseCompletedCount();
             }
+        }
+        private void ExitApplication()
+        {
+            Application.Current.Shutdown();
         }
 
 
