@@ -8,11 +8,14 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Data;
+using System.Windows.Forms;
 using System.Windows.Input;
 using TaskApplication.Helpers;
 using TaskApplication.Models;
 using TaskApplication.Services;
 using TaskApplication.ViewModels;
+using Application = System.Windows.Application;
+using MessageBox = System.Windows.Forms.MessageBox;
 using RelayCommand = TaskApplication.Helpers.RelayCommand;
 using Task = TaskApplication.Models.Task;
 
@@ -32,7 +35,7 @@ namespace TaskApplication
             ItemsCollection = toDoListManager.ItemsCollection;
             TaskCollection=taskManager.TaskList;
             StatisticsCollection=statisticsManager.Statistics;
-          
+            FilteredTaskCollection = new ObservableCollection<Task>(TaskCollection);
         }
         public ICommand OpenAddToDoListWindowCommand => new RelayCommand(OpenAddToDoListWindow);
         public ICommand OpenAddTaskWindowCommand=>new RelayCommand(OpenAddTaskWindow);
@@ -43,6 +46,19 @@ namespace TaskApplication
          public ICommand MoveUpTaskCommand => new RelayCommand(MoveUpTask);
          public ICommand MoveDownTaskCommand => new RelayCommand(MoveDownTask);
         public ICommand OpenEditTaskCommand=>new RelayCommand(OpenEditTaskWindow);
+        public ICommand OpenEditToDoListWindowCommand => new RelayCommand(OpenEditToDoListWindow);
+        public ICommand SortByDeadlineCommand => new RelayCommand(SortByDeadline);
+        public ICommand SortByPriorityCommand => new RelayCommand(SortByPriority);
+        public ICommand FilterByWorkCategoryCommand=> new RelayCommand(FilterByWorkCategory);
+        public ICommand FilterByPersonalCategoryCommand => new RelayCommand(FilterByPersonalCategory);
+        public ICommand FilterByOtherCategoryCommand => new RelayCommand(FilterByOtherCategory);
+        public ICommand FilterBySchoolCategoryCommand => new RelayCommand(FilterBySchoolCategory);
+        public ICommand FilterByOverdueCategoryCommand => new RelayCommand(FilterByOverdueCategory);
+        public ICommand FilterByToDoCategoryCommand => new RelayCommand(FilterByToDoCategory);
+        public ICommand ShwoAllTasksCommand=> new RelayCommand(ShowAllTasks);
+      
+        
+        //actiuni pe TDL-uri
         private void OpenAddToDoListWindow()
         {
             AddTDL addTDLWindow = new AddTDL();
@@ -50,20 +66,30 @@ namespace TaskApplication
             addTDLWindow.DataContext = addNewTDLViewModel;
             addTDLWindow.ShowDialog();
         }
+        private void OpenEditToDoListWindow()
+        {
+            EditTDL editTDLWindow = new EditTDL();
+            EditTDLViewModel editTDLViewModel = new EditTDLViewModel(toDoListManager,doList);
+            editTDLWindow.DataContext = editTDLViewModel;
+            editTDLWindow.ShowDialog();
+        }
+
+        //actiuni pe task-uri
         private void OpenAddTaskWindow()
         {
             AddTask addTaskWindow=new AddTask();
-            AddNewTaskViewModel addNewTaskViewModel = new AddNewTaskViewModel(taskManager);
+            AddNewTaskViewModel addNewTaskViewModel = new AddNewTaskViewModel(taskManager, statisticsManager);
             addTaskWindow.DataContext = addNewTaskViewModel;
             addTaskWindow.ShowDialog();
-            statisticsManager.IncreaseAllCount();
+            FilteredTaskCollection = taskManager.TaskList;
         }
         private void OpenEditTaskWindow()
         {
             EditTask editTaskWindow = new EditTask();
-            EditTaskViewModel editTaskViewModel = new EditTaskViewModel(SelectedTask, taskManager);
+            EditTaskViewModel editTaskViewModel = new EditTaskViewModel(SelectedTask, taskManager, statisticsManager);
             editTaskWindow.DataContext = editTaskViewModel;
             editTaskWindow.ShowDialog();
+            FilteredTaskCollection = taskManager.TaskList;
         }
         private void OpenFindTaskWindow()
         {
@@ -77,7 +103,98 @@ namespace TaskApplication
             if(SelectedTask!=null)
             statisticsManager.DecreaseAllCount(SelectedTask);
             TaskCollection.Remove(SelectedTask);
+            FilteredTaskCollection.Remove(SelectedTask);
         }
+        private void MoveUpTask()
+        {
+            taskManager.MoveSelectedItem(-1, SelectedTask);
+            FilteredTaskCollection = taskManager.TaskList;
+        }
+        private void MoveDownTask()
+        {
+            taskManager.MoveSelectedItem(1, SelectedTask);
+            FilteredTaskCollection = taskManager.TaskList;
+        }
+
+        //sortari si filtrari de task-uri
+        private void SortByDeadline()
+        {
+            FilteredTaskCollection = TaskCollection;
+            if (FilteredTaskCollection != null)
+            {
+                FilteredTaskCollection = new ObservableCollection<Task>(FilteredTaskCollection.OrderBy(x => x.Deadline));
+            }
+        }
+        private void SortByPriority()
+        {
+            FilteredTaskCollection = TaskCollection;
+            if (FilteredTaskCollection != null)
+            {
+                FilteredTaskCollection = new ObservableCollection<Task>(FilteredTaskCollection.OrderBy(x => x.Priority));
+            }
+        }
+        private void FilterByWorkCategory()
+        {
+            FilteredTaskCollection = TaskCollection;
+            if (FilteredTaskCollection != null)
+            {
+                FilteredTaskCollection = new ObservableCollection<Task>(FilteredTaskCollection.Where(x => x.Category == Task.CategoryType.Work));
+            }
+        }
+        private void FilterByPersonalCategory()
+        {
+            FilteredTaskCollection = TaskCollection;
+            if (FilteredTaskCollection != null)
+            {
+                FilteredTaskCollection = new ObservableCollection<Task>(FilteredTaskCollection.Where(x => x.Category == Task.CategoryType.Personal));
+            }
+        }
+        private void FilterByOtherCategory()
+        {
+            FilteredTaskCollection = TaskCollection;
+            if (FilteredTaskCollection != null)
+            {
+                FilteredTaskCollection = new ObservableCollection<Task>(FilteredTaskCollection.Where(x => x.Category == Task.CategoryType.Other));
+
+            }
+        }
+        private void FilterBySchoolCategory()
+        {
+            FilteredTaskCollection = TaskCollection;
+            if (FilteredTaskCollection != null)
+            {
+                FilteredTaskCollection = new ObservableCollection<Task>(FilteredTaskCollection.Where(x => x.Category == Task.CategoryType.School));
+            }
+        }
+        private void FilterByOverdueCategory()
+        {
+            FilteredTaskCollection = TaskCollection;
+            if (FilteredTaskCollection != null)
+            {
+                FilteredTaskCollection = new ObservableCollection<Task>(FilteredTaskCollection.Where(x => x.Deadline < DateTime.Now));
+            }
+        }
+        private void FilterByToDoCategory()
+        {
+            FilteredTaskCollection = TaskCollection;
+            if (FilteredTaskCollection != null)
+            {
+                FilteredTaskCollection = new ObservableCollection<Task>(FilteredTaskCollection.Where(x => x.Deadline > DateTime.Now));
+            }
+        }
+        private void ShowAllTasks()
+        {
+            FilteredTaskCollection = TaskCollection;
+            if (FilteredTaskCollection != null)
+            {
+                FilteredTaskCollection = new ObservableCollection<Task>(FilteredTaskCollection.Where(x => x.Name != null));
+
+            }
+
+        }
+
+
+
         private void UpdateTaskDone(bool done)
         {
             if (SelectedTask != null)
@@ -90,15 +207,8 @@ namespace TaskApplication
         private void ExitApplication()
         {
             Application.Current.Shutdown();
-        }
-        private void MoveUpTask()
-        {
-            taskManager.MoveSelectedItem(-1, SelectedTask);
-        }
-        private void MoveDownTask()
-        {
-            taskManager.MoveSelectedItem(1, SelectedTask);
-        }
+        }   
+       
         private ObservableCollection<ToDoList> _itemsCollection;
         public ObservableCollection<ToDoList> ItemsCollection
         {
@@ -121,6 +231,7 @@ namespace TaskApplication
         }
 
         private Task _selectedTask;
+
         public Task SelectedTask
         {
             get { return _selectedTask; }
@@ -138,6 +249,16 @@ namespace TaskApplication
             {
                 _statisticsCollection = value;
                 NotifyPropertyChanged(nameof(Statistics));
+            }
+        }
+        private ObservableCollection<Task> _filteredTaskCollection;
+        public ObservableCollection<Task> FilteredTaskCollection
+        {
+            get { return _filteredTaskCollection; }
+            set
+            {
+                _filteredTaskCollection = value;
+                NotifyPropertyChanged(nameof(FilteredTaskCollection));
             }
         }
 

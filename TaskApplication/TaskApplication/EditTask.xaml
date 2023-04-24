@@ -5,10 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TaskApplication"
         mc:Ignorable="d"
+        ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen"
         Title="EditTask" Height="450" Width="800">
     <Grid>
-
-
         <StackPanel Name="EditTaskStackPanel" Width="300" HorizontalAlignment="Center" Margin="0,51,0,8" Height="NaN" DataContext="{Binding SelectedTask}">
             <Label Content="Name" Height="24" />
             <TextBox x:Name="txtName"  Text="{Binding Name}"/>
@@ -44,7 +44,7 @@
                 <ComboBoxItem Content="School"/>
                 <ComboBoxItem Content="Personal"/>
             </ComboBox>
-            <Button x:Name="AddEditedTaskButton" Content="Add editet task" Height="20" Command="{Binding AddEditedTaskCommand}"/>
+            <Button Name="AddEditedTaskButton" Content="Add editet task" Height="20" Command="{Binding AddEditedTaskCommand}"/>
         </StackPanel>
     </Grid>
 </Window>

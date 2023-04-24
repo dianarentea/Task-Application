@@ -7,6 +7,7 @@ using System.Windows.Input;
 using TaskApplication.Helpers;
 using TaskApplication.Models;
 using TaskApplication.Services;
+using Application = System.Windows.Application;
 
 namespace TaskApplication.ViewModels
 {
@@ -24,13 +25,13 @@ namespace TaskApplication.ViewModels
             }
 
         public TaskManager _taskManager;
+        public StatisticsManager _statisticsManager;
         public int index=0;
-        public EditTaskViewModel(Task selectedTask, TaskManager taskManager)
+        public EditTaskViewModel(Task selectedTask, TaskManager taskManager, StatisticsManager statisticsManager )
         {
             this._selectedTask = selectedTask;
             this._taskManager = taskManager;
-            //index= _taskManager.GetIndex(selectedTask);
-            
+            this._statisticsManager = statisticsManager;
         }
         private string _name;
         public string Name
@@ -121,8 +122,10 @@ namespace TaskApplication.ViewModels
             _selectedTask.Type = SelectedType;
             _selectedTask.Category = SelectedCategory;
 
+            _statisticsManager.IncreaseEditTaskCount(_selectedTask);
             _taskManager.AddEditedTask(_selectedTask, index);
           
+            
             Application.Current.Windows.OfType<EditTask>().FirstOrDefault()?.Close();
         }
     }

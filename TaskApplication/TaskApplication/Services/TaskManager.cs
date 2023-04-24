@@ -57,5 +57,6 @@ namespace TaskApplication.Services
             TaskList.Move(oldIndex, newIndex);
             NotifyPropertyChanged(nameof (TaskList));
         }
+
     }
 }

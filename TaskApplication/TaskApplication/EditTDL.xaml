@@ -1,0 +1,23 @@
+﻿<Window x:Class="TaskApplication.EditTDL"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TaskApplication"
+        mc:Ignorable="d"
+        Title="EditTDL" Height="450" Width="800">
+    <Grid DataContext="{Binding SelectedTDL}">
+       
+            <Image Name="picHolder" Margin="487,114,143,174" Stretch="Fill" Source="{Binding AvailableImages}"/>
+
+            <StackPanel Margin="470,273,85,91" Orientation="Horizontal" Height="NaN" Width="NaN">
+                <Button Content="Back" Command="{Binding SelectPreviousImageCommand}"  Height="25" Width="103"/>
+                <Button Content="Next" Command="{Binding SelectNextImageCommand }" Height="25" Width="106"/>
+            </StackPanel>
+            <TextBlock Text="Write the name of TDL: " FontSize="12"  HorizontalAlignment="Left" FontStyle="Normal"  Foreground="#FF1F70A7" FontWeight="Bold" Margin="88,259,0,91"/>
+            <TextBox Name="newToDoListName" Text="{Binding TDLName, Mode=TwoWay}" HorizontalAlignment="Left" Margin="88,287,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="153" Height="25"/>
+        <Button Content="Add TDL" Command="{Binding SaveTDLCommand}" HorizontalAlignment="Center" Margin="0,367,0,0" VerticalAlignment="Top" Width="164" Height="25" />
+        </Grid>
+
+    
+</Window>

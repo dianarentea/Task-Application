@@ -34,7 +34,7 @@
             <MenuItem Header="TDL">
                 <MenuItem Header="Add Root TDL" Command="{Binding OpenAddToDoListWindowCommand}" />
                 <MenuItem Header="Add Sub-TDL"/>
-                <MenuItem Header="Edit"/>
+                <MenuItem Header="Edit" Command="{Binding OpenEditToDoListWindowCommand}"/>
                 <MenuItem Header="Delete"/>
                 <Separator/>
                 <MenuItem Header="Move Up"  />
@@ -55,22 +55,21 @@
             </MenuItem>
             <MenuItem Header="View">
                 <MenuItem Header="Sort">
-                    <MenuItem Header="By Priority"  />
-                    <MenuItem Header="By Deadline"  />
+                    <MenuItem Header="By Priority" Command="{Binding SortByPriorityCommand}" />
+                    <MenuItem Header="By Deadline" Command="{Binding SortByDeadlineCommand}" />
                 </MenuItem>
                 <MenuItem Header="Filter">
                     <MenuItem Header="By Category">
-                        <MenuItem Header="Work" />
-                        <MenuItem Header="Home" />
-                        <MenuItem Header="School" />
-                        <MenuItem Header="Other" />
+                        <MenuItem Header="Work" Command="{Binding FilterByWorkCategoryCommand}" />
+                        <MenuItem Header="Personal" Command="{Binding FilterByPersonalCategoryCommand}" />
+                        <MenuItem Header="School"  Command="{Binding FilterBySchoolCategoryCommand}" />
+                        <MenuItem Header="Other" Command="{Binding FilterByOtherCategoryCommand}"/>
                     </MenuItem>
                     <MenuItem Header="Done tasks" />
-                    <MenuItem Header="Overdue tasks" />
-                    <MenuItem Header="To-Do tasks"/>
-                    <MenuItem Header="All tasks" />
+                    <MenuItem Header="Overdue tasks"  Command="{Binding FilterByOverdueCategoryCommand}"/>
+                    <MenuItem Header="To-Do tasks" Command="{Binding FilterByToDoCategoryCommand}"/>
+                    <MenuItem Header="All tasks"  Command="{Binding ShwoAllTasksCommand}"/>
                 </MenuItem>
-                <MenuItem Header="Statistics"/>
             </MenuItem>
             <MenuItem Header="Help">
                 <MenuItem Header="About"/>
@@ -90,7 +89,7 @@
             </TreeView.ItemTemplate>
         </TreeView>
         <!-- ListView for task list -->
-        <ListView Grid.Row="1" Grid.Column="1" Name="TaskListListView" ItemsSource="{Binding TaskCollection}" SelectedItem="{Binding SelectedTask}">
+        <ListView Grid.Row="1" Grid.Column="1" Name="TaskListListView" ItemsSource="{Binding FilteredTaskCollection}" SelectedItem="{Binding SelectedTask}">
             <!--<ListView.ItemContainerStyle>
                     <Style TargetType="{x:Type ListViewItem}">
                         <Setter Property="Background" Value="Transparent"/>
@@ -107,7 +106,7 @@
             <ListView.View>
                 <GridView>
                     <GridView.ColumnHeaderContainerStyle>
-                        <Style TargetType="{x:Type GridViewColumnHeader}">
+                        <Style TargetType="{x:Type GridViewColumnHeader}" >
                             <Setter Property="IsHitTestVisible" Value="False"/>
                         </Style>
                     </GridView.ColumnHeaderContainerStyle>
@@ -120,8 +119,9 @@
                     </GridViewColumn>
                     <GridViewColumn Header="Title Name" Width="130" DisplayMemberBinding="{Binding Name}"/>
                     <GridViewColumn Header="Priority" Width="100" DisplayMemberBinding="{Binding Priority}" />
-                    <GridViewColumn Header="Type" Width="110" DisplayMemberBinding="{Binding Type}" />
-                    <GridViewColumn Header="Deadline" Width="220" DisplayMemberBinding="{Binding Deadline}" />
+                    <GridViewColumn Header="Type" Width="50" DisplayMemberBinding="{Binding Type}" />
+                    <GridViewColumn Header="Deadline" Width="160" DisplayMemberBinding="{Binding Deadline}" />
+                    <GridViewColumn Header="Category" Width="120" DisplayMemberBinding="{Binding Category}"/>
                 </GridView>
             </ListView.View>
         </ListView>

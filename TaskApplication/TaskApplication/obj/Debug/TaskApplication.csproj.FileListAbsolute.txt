@@ -35,3 +35,5 @@ D:\Facultate\MVP\Task-Application\TaskApplication\TaskApplication\obj\Debug\Find
 D:\Facultate\MVP\Task-Application\TaskApplication\TaskApplication\obj\Debug\FindTask.baml
 D:\Facultate\MVP\Task-Application\TaskApplication\TaskApplication\obj\Debug\EditTask.g.cs
 D:\Facultate\MVP\Task-Application\TaskApplication\TaskApplication\obj\Debug\EditTask.baml
+D:\Facultate\MVP\Task-Application\TaskApplication\TaskApplication\obj\Debug\EditTDL.g.cs
+D:\Facultate\MVP\Task-Application\TaskApplication\TaskApplication\obj\Debug\EditTDL.baml

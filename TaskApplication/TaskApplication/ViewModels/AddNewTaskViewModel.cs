@@ -13,9 +13,11 @@ namespace TaskApplication.ViewModels
     internal class AddNewTaskViewModel : BaseVM
     {
         public TaskManager _taskManager;
-        public AddNewTaskViewModel(TaskManager taskManager)
+        public StatisticsManager _statisticsManager;
+        public AddNewTaskViewModel(TaskManager taskManager, StatisticsManager statisticsManager)
         {
             this._taskManager = taskManager;
+            this._statisticsManager = statisticsManager;
         }
         private string _name;
         public string Name
@@ -104,7 +106,8 @@ namespace TaskApplication.ViewModels
                                    SelectedDate,
                                   (Task.PriorityType)SelectedType,
                                    false);
-
+            _statisticsManager.IncreaseEditTaskCount(newTask);
+           _statisticsManager.IncreaseAllCount();
             _taskManager.AddTask(newTask);
             Application.Current.Windows.OfType<AddTask>().FirstOrDefault()?.Close();
         }
