@@ -50,7 +50,6 @@
                 <MenuItem Name="MoveUpMenuItem" Header="Move Up" Command="{Binding MoveUpTaskCommand}"/>
                 <MenuItem Name="MoveDownMenuItem" Header="Move Down" Command="{Binding MoveDownTaskCommand}" />
                 <Separator/>
-                <MenuItem Header="Manage Category"/>
                 <MenuItem Header="Find Task" Command="{Binding OpenFindTaskWindowCommand}" />
             </MenuItem>
             <MenuItem Header="View">

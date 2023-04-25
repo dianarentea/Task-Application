@@ -57,14 +57,14 @@ namespace TaskApplication.ViewModels
             IEnumerable<Task> tasks = _taskManager.TaskList;
 
             bool filterByName = !string.IsNullOrWhiteSpace(Name);
-            bool filterByDate = SelectedDate != default(DateTime);
+           
 
             if (filterByName)
             {
                 tasks = tasks.Where(t => t.Name.ToLower().Contains(Name.ToLower()));
             }
 
-            if (filterByDate)
+            else
             {
                 tasks = tasks.Where(t => t.Deadline.Date == SelectedDate.Date);
             }

@@ -126,6 +126,6 @@ namespace TaskApplication.Models
         {
             DoneChanged?.Invoke(this, EventArgs.Empty);
         }
-
+       
     }
 }
