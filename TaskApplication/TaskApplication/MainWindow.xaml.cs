@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using TaskApplication.Models;
 
 namespace TaskApplication
 {
@@ -20,6 +21,19 @@ namespace TaskApplication
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        private void FolderList_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
+        {
+            var viewModel = DataContext as ToDoListViewModel;
+            if (viewModel != null)
+            {
+                var selectedTDL = FolderList.SelectedItem as ToDoList;
+                if (selectedTDL != null)
+                {
+                    viewModel.OpenEditToDoListWindow(selectedTDL);
+                }
+            }
         }
     }
 }

@@ -128,5 +128,6 @@ namespace TaskApplication.ViewModels
             
             Application.Current.Windows.OfType<EditTask>().FirstOrDefault()?.Close();
         }
+
     }
 }

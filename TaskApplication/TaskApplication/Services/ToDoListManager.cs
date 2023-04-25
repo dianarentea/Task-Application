@@ -81,6 +81,19 @@ namespace TaskApplication.Services
             ItemsCollection.Add(item);
             NotifyPropertyChanged(nameof(ItemsCollection));
         }
+        public void RemoveItem(ToDoList item)
+        {
+            if (ItemsCollection.Contains(item))
+            {
+                ItemsCollection.Remove(item);
+                NotifyPropertyChanged(nameof(ItemsCollection));
+
+                foreach (ToDoList subItem in item.SubCollection)
+                {
+                    RemoveItem(subItem);
+                }
+            }
+        }
 
 
     }

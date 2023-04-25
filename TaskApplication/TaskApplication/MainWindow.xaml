@@ -34,8 +34,8 @@
             <MenuItem Header="TDL">
                 <MenuItem Header="Add Root TDL" Command="{Binding OpenAddToDoListWindowCommand}" />
                 <MenuItem Header="Add Sub-TDL"/>
-                <MenuItem Header="Edit" Command="{Binding OpenEditToDoListWindowCommand}"/>
-                <MenuItem Header="Delete"/>
+                <MenuItem Header="Edit" Command="{Binding ShowMessageCommand}"/>
+                <MenuItem Header="Delete" Command="{Binding ShowMessageCommand}"/>
                 <Separator/>
                 <MenuItem Header="Move Up"  />
                 <MenuItem Header="Move Down" />
@@ -77,12 +77,12 @@
         </Menu>
 
         <!-- ListView for folder list -->
-        <TreeView Name="FolderList" Grid.Row="1" Grid.Column="0" ItemsSource="{Binding ItemsCollection}">
+        <TreeView Name="FolderList" Grid.Row="1" Grid.Column="0" ItemsSource="{Binding ItemsCollection}" SelectedItemChanged="FolderList_SelectedItemChanged">
             <TreeView.ItemTemplate>
                 <HierarchicalDataTemplate ItemsSource="{Binding SubCollection}">
                     <StackPanel Orientation="Horizontal">
-                        <Image Source="{Binding Image}" Width="30" Height="30"/>
-                    <TextBlock  Text="{Binding Name}">
+                        <Image Source="{Binding Image}" Width="50" Height="50"/>
+                    <TextBlock  Text="{Binding Name}" FontWeight="DemiBold" FontSize="25">
                     </TextBlock>
                     </StackPanel>
                 </HierarchicalDataTemplate>

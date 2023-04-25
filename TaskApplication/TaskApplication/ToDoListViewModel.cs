@@ -23,6 +23,7 @@ namespace TaskApplication
 {
     internal class ToDoListViewModel : BaseVM
     {
+
         public ToDoListManager toDoListManager;
         public ToDoList doList;
         public TaskManager taskManager;
@@ -41,27 +42,6 @@ namespace TaskApplication
                 task.DoneChanged += Task_DoneChanged;
             }
         }
-        public ICommand OpenAddToDoListWindowCommand => new RelayCommand(OpenAddToDoListWindow);
-        public ICommand OpenAddTaskWindowCommand=>new RelayCommand(OpenAddTaskWindow);
-        public ICommand RemoveTaskCommand => new RelayCommand(RemoveTask);
-        public ICommand UpdateTaskDoneCommand => new RelayCommand<bool>(UpdateTaskDone);
-        public ICommand OpenFindTaskWindowCommand => new RelayCommand(OpenFindTaskWindow);
-        public ICommand ExitApplicationCommand=> new RelayCommand(ExitApplication);
-         public ICommand MoveUpTaskCommand => new RelayCommand(MoveUpTask);
-         public ICommand MoveDownTaskCommand => new RelayCommand(MoveDownTask);
-        public ICommand OpenEditTaskCommand=>new RelayCommand(OpenEditTaskWindow);
-        public ICommand OpenEditToDoListWindowCommand => new RelayCommand(OpenEditToDoListWindow);
-        public ICommand SortByDeadlineCommand => new RelayCommand(SortByDeadline);
-        public ICommand SortByPriorityCommand => new RelayCommand(SortByPriority);
-        public ICommand FilterByWorkCategoryCommand=> new RelayCommand(FilterByWorkCategory);
-        public ICommand FilterByPersonalCategoryCommand => new RelayCommand(FilterByPersonalCategory);
-        public ICommand FilterByOtherCategoryCommand => new RelayCommand(FilterByOtherCategory);
-        public ICommand FilterBySchoolCategoryCommand => new RelayCommand(FilterBySchoolCategory);
-        public ICommand FilterByOverdueCategoryCommand => new RelayCommand(FilterByOverdueCategory);
-        public ICommand FilterByToDoCategoryCommand => new RelayCommand(FilterByToDoCategory);
-        public ICommand ShwoAllTasksCommand=> new RelayCommand(ShowAllTasks);
-        public ICommand ShowAboutStudentCommand=> new RelayCommand(ShowAboutStudent);
-      public ICommand DeleteCompletedTaskCommand=> new RelayCommand(DeleteCompletedTask);
         
         //actiuni pe TDL-uri
         private void OpenAddToDoListWindow()
@@ -71,12 +51,20 @@ namespace TaskApplication
             addTDLWindow.DataContext = addNewTDLViewModel;
             addTDLWindow.ShowDialog();
         }
-        private void OpenEditToDoListWindow()
+        public void OpenEditToDoListWindow(ToDoList selectedTDL)
         {
-            EditTDL editTDLWindow = new EditTDL();
-            EditTDLViewModel editTDLViewModel = new EditTDLViewModel(toDoListManager,doList);
-            editTDLWindow.DataContext = editTDLViewModel;
-            editTDLWindow.ShowDialog();
+            if (selectedTDL != null)
+            {
+                EditTDL editTDLWindow = new EditTDL();
+                EditTDLViewModel editTDLViewModel = new EditTDLViewModel(toDoListManager, selectedTDL);
+                editTDLWindow.DataContext = editTDLViewModel;
+                editTDLWindow.ShowDialog();
+            }
+        }
+       
+        private void ShowMessage()
+        {
+            MessageBox.Show("To edit(delete) a TDL, press on its image");
         }
 
         //actiuni pe task-uri
@@ -198,7 +186,6 @@ namespace TaskApplication
             }
 
         }
-
         private void Task_DoneChanged(object sender, EventArgs e)
         {
             if (sender is Task task)
@@ -206,7 +193,6 @@ namespace TaskApplication
                 UpdateTaskDone(task.Done);
             }
         }
-
         private void UpdateTaskDone(bool done)
         {
             if (SelectedTask != null)
@@ -225,7 +211,6 @@ namespace TaskApplication
                 FilteredTaskCollection.Remove(task);
             }
         }
-
         private void ExitApplication()
         {
             Application.Current.Shutdown();
@@ -234,6 +219,7 @@ namespace TaskApplication
         {
             MessageBox.Show("Rentea Diana-Andreeea\nGroup 213\ndiana.rentea@student.unitbv.ro", "Informative box", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
+
         private ObservableCollection<ToDoList> _itemsCollection;
         public ObservableCollection<ToDoList> ItemsCollection
         {
@@ -244,6 +230,13 @@ namespace TaskApplication
                 NotifyPropertyChanged(nameof(ItemsCollection));
             }
         }
+        private ToDoList _selectedTDL;
+        public ToDoList SelectedTDL
+        {
+            get { return _selectedTDL; }
+            set { _selectedTDL = value; NotifyPropertyChanged("SelectedTDL"); }
+        }
+
         private ObservableCollection<Task> _taskCollection;
         public ObservableCollection<Task> TaskCollection
         {
@@ -287,7 +280,30 @@ namespace TaskApplication
             }
         }
 
-       
+        public ICommand OpenAddToDoListWindowCommand => new RelayCommand(OpenAddToDoListWindow);
+        public ICommand OpenAddTaskWindowCommand => new RelayCommand(OpenAddTaskWindow);
+        public ICommand RemoveTaskCommand => new RelayCommand(RemoveTask);
+        public ICommand UpdateTaskDoneCommand => new RelayCommand<bool>(UpdateTaskDone);
+        public ICommand OpenFindTaskWindowCommand => new RelayCommand(OpenFindTaskWindow);
+        public ICommand ExitApplicationCommand => new RelayCommand(ExitApplication);
+        public ICommand MoveUpTaskCommand => new RelayCommand(MoveUpTask);
+        public ICommand MoveDownTaskCommand => new RelayCommand(MoveDownTask);
+        public ICommand OpenEditTaskCommand => new RelayCommand(OpenEditTaskWindow);
+        public ICommand OpenEditToDoListCommand => new RelayCommand<ToDoList>(OpenEditToDoListWindow);
+        public ICommand ShowMessageCommand=> new RelayCommand(ShowMessage);
+
+        public ICommand SortByDeadlineCommand => new RelayCommand(SortByDeadline);
+        public ICommand SortByPriorityCommand => new RelayCommand(SortByPriority);
+        public ICommand FilterByWorkCategoryCommand => new RelayCommand(FilterByWorkCategory);
+        public ICommand FilterByPersonalCategoryCommand => new RelayCommand(FilterByPersonalCategory);
+        public ICommand FilterByOtherCategoryCommand => new RelayCommand(FilterByOtherCategory);
+        public ICommand FilterBySchoolCategoryCommand => new RelayCommand(FilterBySchoolCategory);
+        public ICommand FilterByOverdueCategoryCommand => new RelayCommand(FilterByOverdueCategory);
+        public ICommand FilterByToDoCategoryCommand => new RelayCommand(FilterByToDoCategory);
+        public ICommand ShwoAllTasksCommand => new RelayCommand(ShowAllTasks);
+        public ICommand ShowAboutStudentCommand => new RelayCommand(ShowAboutStudent);
+        public ICommand DeleteCompletedTaskCommand => new RelayCommand(DeleteCompletedTask);
+
 
 
 
