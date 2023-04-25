@@ -72,9 +72,22 @@ namespace TaskApplication.Services
                 Statistics.OverdueCount++;
             }
         }
-        public void IncreaseCompletedCount()
+        public void UpdateCompletedCount(Task task)
         {
             Statistics.CompletedCount++;
+            Statistics.AllCount--;
+            if (task.Deadline == DateTime.Today)
+            {
+                Statistics.DueTodayCount--;
+            }
+            else if (task.Deadline == DateTime.Today.AddDays(1))
+            {
+                Statistics.DueTomorrowCount--;
+            }
+            else if (task.Deadline < DateTime.Today)
+            {
+                Statistics.OverdueCount--;
+            }
         }
     }
 }

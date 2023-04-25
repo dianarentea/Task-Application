@@ -36,6 +36,10 @@ namespace TaskApplication
             TaskCollection=taskManager.TaskList;
             StatisticsCollection=statisticsManager.Statistics;
             FilteredTaskCollection = new ObservableCollection<Task>(TaskCollection);
+            foreach (var task in TaskCollection)
+            {
+                task.DoneChanged += Task_DoneChanged;
+            }
         }
         public ICommand OpenAddToDoListWindowCommand => new RelayCommand(OpenAddToDoListWindow);
         public ICommand OpenAddTaskWindowCommand=>new RelayCommand(OpenAddTaskWindow);
@@ -57,7 +61,7 @@ namespace TaskApplication
         public ICommand FilterByToDoCategoryCommand => new RelayCommand(FilterByToDoCategory);
         public ICommand ShwoAllTasksCommand=> new RelayCommand(ShowAllTasks);
         public ICommand ShowAboutStudentCommand=> new RelayCommand(ShowAboutStudent);
-      
+      public ICommand DeleteCompletedTaskCommand=> new RelayCommand(DeleteCompletedTask);
         
         //actiuni pe TDL-uri
         private void OpenAddToDoListWindow()
@@ -83,6 +87,7 @@ namespace TaskApplication
             addTaskWindow.DataContext = addNewTaskViewModel;
             addTaskWindow.ShowDialog();
             FilteredTaskCollection = taskManager.TaskList;
+
         }
         private void OpenEditTaskWindow()
         {
@@ -120,7 +125,7 @@ namespace TaskApplication
         //sortari si filtrari de task-uri
         private void SortByDeadline()
         {
-            FilteredTaskCollection = TaskCollection;
+            //FilteredTaskCollection = TaskCollection;
             if (FilteredTaskCollection != null)
             {
                 FilteredTaskCollection = new ObservableCollection<Task>(FilteredTaskCollection.OrderBy(x => x.Deadline));
@@ -128,7 +133,7 @@ namespace TaskApplication
         }
         private void SortByPriority()
         {
-            FilteredTaskCollection = TaskCollection;
+            //FilteredTaskCollection = TaskCollection;
             if (FilteredTaskCollection != null)
             {
                 FilteredTaskCollection = new ObservableCollection<Task>(FilteredTaskCollection.OrderBy(x => x.Priority));
@@ -194,17 +199,33 @@ namespace TaskApplication
 
         }
 
-
+        private void Task_DoneChanged(object sender, EventArgs e)
+        {
+            if (sender is Task task)
+            {
+                UpdateTaskDone(task.Done);
+            }
+        }
 
         private void UpdateTaskDone(bool done)
         {
             if (SelectedTask != null)
             {
-                SelectedTask.Done = done;
                 taskManager.UpdateDone(SelectedTask);
-                statisticsManager.IncreaseCompletedCount();
+                statisticsManager.UpdateCompletedCount(SelectedTask);
             }
         }
+        private void DeleteCompletedTask()
+        {
+            var completedTasks = TaskCollection.Where(t => t.Done).ToList();
+            foreach (var task in completedTasks)
+            {
+                TaskCollection.Remove(task);
+                statisticsManager.DecreaseAllCount(task);
+                FilteredTaskCollection.Remove(task);
+            }
+        }
+
         private void ExitApplication()
         {
             Application.Current.Shutdown();

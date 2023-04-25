@@ -45,7 +45,7 @@
                 <MenuItem Header="Add" Command="{Binding OpenAddTaskWindowCommand}"/>
                 <MenuItem Header="Edit" Command="{Binding OpenEditTaskCommand}" />
                 <MenuItem Header="Delete" Command="{Binding RemoveTaskCommand}"/>
-                <MenuItem Header="Set Done" />
+                <MenuItem Header="Set Done" Command="{Binding DeleteCompletedTaskCommand}"/>
                 <Separator/>
                 <MenuItem Name="MoveUpMenuItem" Header="Move Up" Command="{Binding MoveUpTaskCommand}"/>
                 <MenuItem Name="MoveDownMenuItem" Header="Move Down" Command="{Binding MoveDownTaskCommand}" />
@@ -90,19 +90,19 @@
         </TreeView>
         <!-- ListView for task list -->
         <ListView Grid.Row="1" Grid.Column="1" Name="TaskListListView" ItemsSource="{Binding FilteredTaskCollection}" SelectedItem="{Binding SelectedTask}">
-            <!--<ListView.ItemContainerStyle>
+            <ListView.ItemContainerStyle>
                     <Style TargetType="{x:Type ListViewItem}">
                         <Setter Property="Background" Value="Transparent"/>
                         <Setter Property="BorderBrush" Value="Transparent"/>
                         <Style.Triggers>
                             <DataTrigger Binding="{Binding Done}" Value="True">
-                                <Setter Property="Background" Value="Green"/>
-                                <Setter Property="BorderBrush" Value="Green"/>
+                                <Setter Property="Background" Value="MediumAquamarine"/>
+                                <Setter Property="BorderBrush" Value="MediumAquamarine"/>
                                 <Setter Property="BorderThickness" Value="1"/>
                             </DataTrigger>
                         </Style.Triggers>
                     </Style>
-                </ListView.ItemContainerStyle>-->
+                </ListView.ItemContainerStyle>
             <ListView.View>
                 <GridView>
                     <GridView.ColumnHeaderContainerStyle>

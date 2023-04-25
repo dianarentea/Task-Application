@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Policy;
 using System.Text;
 using TaskApplication.Helpers;
 
@@ -111,11 +112,20 @@ namespace TaskApplication.Models
             get { return done; }
             set
             {
-                done = value;
-                NotifyPropertyChanged("Done");
+                if (done != value)
+                {
+                    done = value;
+                    NotifyPropertyChanged(nameof(Done));
+                    OnDoneChanged();
+                }
             }
         }
+        public event EventHandler DoneChanged;
 
+        private void OnDoneChanged()
+        {
+            DoneChanged?.Invoke(this, EventArgs.Empty);
+        }
 
     }
 }

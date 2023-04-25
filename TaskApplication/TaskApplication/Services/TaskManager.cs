@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
+using System.Windows;
 using TaskApplication.Models;
 
 namespace TaskApplication.Services
@@ -31,6 +32,7 @@ namespace TaskApplication.Services
         }
         public void AddTask(Task task)
         {
+           
             TaskList.Add(task);
             NotifyPropertyChanged(nameof(TaskList));
         }
@@ -49,11 +51,14 @@ namespace TaskApplication.Services
         public void MoveSelectedItem(int direction, Task task)
         {
             if (task == null || TaskList.Count < 2)
-                return;
+                return; 
             int oldIndex = TaskList.IndexOf(task);
             int newIndex = oldIndex + direction;
             if (newIndex < 0 || newIndex >= TaskList.Count)
+            {
+                MessageBox.Show("You can't move this item any further in this direction.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
+            }
             TaskList.Move(oldIndex, newIndex);
             NotifyPropertyChanged(nameof (TaskList));
         }
